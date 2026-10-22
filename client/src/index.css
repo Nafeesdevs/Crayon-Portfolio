@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: #FFC93C; color: #17151C; }
+  @media (pointer: fine) {
+    body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
+  }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10; }
+
+  /* Figma-like dotted canvas */
+  .canvas-dots {
+    background-image: radial-gradient(rgba(23, 21, 28, 0.13) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
+
+  .sticker { @apply rounded-2xl border-[2.5px] border-ink bg-white shadow-sticker; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-white px-3 py-1 text-sm font-medium; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-[2.5px] border-ink px-6 py-3 font-display text-base font-semibold shadow-sticker transition-all duration-200;
+  }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 0 #17151C; }
+  .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 #17151C; }
+
+  .tape {
+    @apply absolute h-7 w-24 opacity-80;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,.35) 0 6px, transparent 6px 12px);
+    mix-blend-mode: multiply;
+  }
+
+  .text-outline { -webkit-text-stroke: 2px #17151C; color: transparent; }
+
+  /* admin form controls */
+  .field { @apply w-full rounded-xl border-2 border-ink/15 bg-white px-3.5 py-2.5 text-[15px] outline-none transition focus:border-ink focus:shadow-[3px_3px_0_0_#17151C]; }
+  .label { @apply mb-1.5 block text-xs font-bold uppercase tracking-wider text-ink/60; }
+}
+
+/* paper grain */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
